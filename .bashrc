@@ -155,39 +155,19 @@ alias cbwd="pwd | cb"
 # Copy most recent command in bash history
 alias cbhs="cat $HISTFILE | tail -n 1 | cb" 
 
-#bens aliases
-alias edithosts='sudo vim /etc/hosts'
-alias passgen='pwgen -csy 22 1'
-alias apassgen='pwgen -cs 22 1'
-alias alpassgen='pwgen -cs 32 1'
-alias apacherestart='sudo service apache2 restart'
-alias apachereload='sudo service apache2 reload'
-alias bashreload='source ~/.bashrc'
-alias bfg='java -jar /home/ben/bin/bfg.jar'
-alias movepanel='xfconf-query -c xfce4-panel -p /panels/panel-0/output-name -s'
-#docker commands
-alias rmssh='ssh-keygen -f "/home/bwheeler/.ssh/known_hosts" -R'
-alias dkssh='ssh -A -o "IdentitiesOnly=yes" -i ~/dockerfiles/phusion_baseimage_key'
-alias dkip='docker inspect -f "{{ .NetworkSettings.IPAddress }}"'
-alias dkps='docker ps'
-alias dkmysql='mysql -uadmin -padmin -h'
-alias fixmic="amixer -c1 cset numid=12,iface=MIXER,name='Input Source',index=0 1 && amixer -c1 cset numid=12,iface=MIXER,name='Input Source',index=0 0"
-alias qrsync="rsync -azvhe ssh --exclude '*.pdf' --exclude '*.doc' --exclude '*.docx' --exclude '*.ppt' --exclude '*.pptx' --exclude ‘*.mp4’ --exclude ‘*.mov’ --exclude ‘*.flv’ --exclude '*.tar.gz' --exclude ‘*.mp3’ --exclude ‘*.swf’"
-alias psgrep="ps -aux | grep "
-alias dnsedit='sudo vim /etc/dnsmasq.conf'
-alias dnsrestart='sudo /etc/init.d/dnsmasq restart'
+#shared aliases
+source ~/.sh_aliases
 
 #http://www.shellperson.net/using-sudo-with-an-alias/
 #help! fix scm_breeze https://github.com/ndbroadbent/scm_breeze/issues/69
 #alias sudo='sudo '
 
-export PATH=$PATH:$HOME/grscripts
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+#export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 [ -s "/$HOME/.nvm/nvm.sh" ] && . "/$HOME//.nvm/nvm.sh" # This loads nvm
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
-[ -s "/home/bwheeler/.scm_breeze/scm_breeze.sh" ] && source "/home/bwheeler/.scm_breeze/scm_breeze.sh"
+[ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
 
+source /etc/bash_completion.d/password-store

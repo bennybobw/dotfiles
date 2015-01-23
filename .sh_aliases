@@ -1,0 +1,29 @@
+#!/bin/sh
+#bens aliases
+#alias cd='pushd'
+alias edithosts='sudo vim /etc/hosts'
+alias passgen='pwgen -csy 22 1'
+alias apassgen='pwgen -cs 22 1'
+alias alpassgen='pwgen -cs 32 1'
+alias apacherestart='sudo service apache2 restart'
+alias apachereload='sudo service apache2 reload'
+alias bashreload='source ~/.bashrc'
+alias bfg='java -jar /home/ben/bin/bfg.jar'
+alias movepanel='xfconf-query -c xfce4-panel -p /panels/panel-0/output-name -s'
+#docker commands
+alias rmssh='ssh-keygen -f "/home/bwheeler/.ssh/known_hosts" -R'
+alias dkssh='ssh -A -o "IdentitiesOnly=yes" -i ~/dockerfiles/phusion_baseimage_key'
+alias dkip='docker inspect -f "{{ .NetworkSettings.IPAddress }}"'
+alias dkps='docker ps'
+alias dkmysql='mysql -uadmin -padmin -h'
+alias fixmic="amixer -c1 cset numid=12,iface=MIXER,name='Input Source',index=0 1 && amixer -c1 cset numid=12,iface=MIXER,name='Input Source',index=0 0"
+alias qrsync="sudo rsync -azvhe ssh --exclude '*.pdf' --exclude '*.doc' --exclude '*.docx' --exclude '*.ppt' --exclude '*.pptx' --exclude ‘*.mp4’ --exclude ‘*.mov’ --exclude ‘*.flv’ --exclude '*.tar.gz' --exclude ‘*.mp3’ --exclude ‘*.swf’"
+alias psgrep="ps -aux | grep "
+alias dnsedit='sudo vim /etc/dnsmasq.conf'
+alias dnsrestart='sudo /etc/init.d/dnsmasq restart'
+alias backup-galapagos='sudo rsync -av /home/bwheeler/ /media/bwheeler/hyperion/galapagos/home/ && sudo rsync -av /var/www/ /media/bwheeler/hyperion/galapagos/var/www/ && sudo rsync -av /var/dockervols/ /media/bwheeler/hyperion/galapagos/var/dockervols/'
+alias server-start='docker start 0b13c95f1a74 && docker start 217b4760db19'
+alias sound-restart='pulseaudio -k && sudo alsa force-reload'
+alias drupalcs="phpcs --standard=~/.drush/coder/coder_sniffer/Drupal --extensions='php,module,inc,install,test,profile,theme,js,css,info,txt'"
+#shared paths
+export PATH="$PATH:$HOME/grscripts:$HOME/usr/bin"
