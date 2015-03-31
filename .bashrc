@@ -170,4 +170,4 @@ source ~/.sh_aliases
 
 [ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
 
-source /etc/bash_completion.d/password-store
+#source /etc/bash_completion.d/password-store

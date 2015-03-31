@@ -1,1 +1,3 @@
 Bundle 'nanotech/jellybeans.vim'
+Bundle 'stulzer/heroku-colorscheme'
+Bundle 'vim-scripts/ecostation'
