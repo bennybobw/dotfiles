@@ -162,12 +162,18 @@ source ~/.sh_aliases
 #help! fix scm_breeze https://github.com/ndbroadbent/scm_breeze/issues/69
 #alias sudo='sudo '
 
-#export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 [ -s "/$HOME/.nvm/nvm.sh" ] && . "/$HOME//.nvm/nvm.sh" # This loads nvm
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
-[ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
+# source /etc/bash_completion.d/password-store
 
-#source /etc/bash_completion.d/password-store
+[ -s "/home/bwheeler/.scm_breeze/scm_breeze.sh" ] && source "/home/bwheeler/.scm_breeze/scm_breeze.sh"
+
+export PATH="$HOME/.composer/vendor/bin:$PATH"
+
+export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
+
+# fix rvm complaining it's in the wrong spot
+source ~/.rvm/environments/default

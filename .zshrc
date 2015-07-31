@@ -1,0 +1,1 @@
+/home/bwheeler/.zprezto/runcoms/zshrc

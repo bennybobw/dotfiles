@@ -40,7 +40,8 @@ endif
 set t_Co=256
 
 " yank and paste to clipboard
-set clipboard=unnamedplus
+" Had to use ^ to prepend clipboard in Ubuntu 15.04, see http://vim.wikia.com/wiki/Accessing_the_system_clipboard
+set clipboard^=unnamedplus
 
 " ignore case on wrapping unless there's an uppercase in the search
 set ignorecase 
