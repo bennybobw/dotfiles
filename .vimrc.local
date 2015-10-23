@@ -9,3 +9,10 @@ let g:autoclose_loaded = 1
 
 map <leader>nt :NERDTreeToggle <CR>
 
+let g:syntastic_php_phpcs_args=" --standard=Drupal --extensions=php,module,inc,install,test,profile,theme"
+" Syntastic settings, adapted from
+" echodittolabs.org/drupal-coding-standards-vim-code-sniffer-syntastic-regex
+if exists('loaded_syntastic_plugin') && strlen(drupal#phpcs_exec)
+  let g:syntastic_php_phpcs_exec = drupal#phpcs_exec
+  let g:syntastic_php_phpcs_args = drupal#phpcs_args
+endif
