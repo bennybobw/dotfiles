@@ -5,7 +5,7 @@ alias edithosts='sudo vim /etc/hosts'
 alias passgen='pwgen -csy 22 1'
 alias apassgen='pwgen -cs 32 1'
 alias alpassgen='pwgen -cs 32 1'
-alias passjs='node /var/www/local.dev/htdocs/pass/pass.js'
+alias passjs='node /var/www/local.lxc/htdocs/pass/pass.js'
 alias apacherestart='sudo service apache2 restart'
 alias apachereload='sudo service apache2 reload'
 alias bashreload='source ~/.bashrc'
@@ -18,14 +18,14 @@ alias dkip='docker inspect -f "{{ .NetworkSettings.IPAddress }}"'
 alias dkps='docker ps'
 alias dkmysql='mysql -uadmin -padmin -h'
 alias fixmic="amixer -c1 cset numid=12,iface=MIXER,name='Input Source',index=0 1 && amixer -c1 cset numid=12,iface=MIXER,name='Input Source',index=0 0"
-alias qrsync="rsync -azvhe ssh --exclude '*.pdf' --exclude '*.doc' --exclude '*.docx' --exclude '*.ppt' --exclude '*.pptx' --exclude ‘*.mp4’ --exclude ‘*.mov’ --exclude ‘*.flv’ --exclude '*.tar.gz' --exclude ‘*.mp3’ --exclude ‘*.swf’"
-alias qrsyncmirror="rsync --delete -azvhe ssh --exclude '*.pdf' --exclude '*.doc' --exclude '*.docx' --exclude '*.ppt' --exclude '*.pptx' --exclude ‘*.mp4’ --exclude ‘*.mov’ --exclude ‘*.flv’ --exclude '*.tar.gz' --exclude ‘*.mp3’ --exclude ‘*.swf’"
+alias qrsync="rsync -azvhe ssh --exclude '*.pdf' --exclude '*.doc' --exclude '*.docx' --exclude '*.ppt' --exclude '*.pptx' --exclude ‘*.mp4’ --exclude ‘*.mov’ --exclude ‘*.flv’ --exclude '*.tar.gz' --exclude ‘*.mp3’ --exclude ‘*.swf’ --exclude ‘*.m4v’"
+alias qrsyncmirror="rsync --delete -azvhe ssh --exclude '*.pdf' --exclude '*.doc' --exclude '*.docx' --exclude '*.ppt' --exclude '*.pptx' --exclude ‘*.mp4’ --exclude ‘*.mov’ --exclude ‘*.flv’ --exclude '*.tar.gz' --exclude ‘*.mp3’ --exclude ‘*.swf’ --exclude ‘*.m4v’"
 alias sudoqrsync="sudo rsync -azvhe ssh --exclude '*.pdf' --exclude '*.doc' --exclude '*.docx' --exclude '*.ppt' --exclude '*.pptx' --exclude ‘*.mp4’ --exclude ‘*.mov’ --exclude ‘*.flv’ --exclude '*.tar.gz' --exclude ‘*.mp3’ --exclude ‘*.swf’"
 alias psgrep="ps -aux | grep "
 alias dnsedit='sudo vim /etc/dnsmasq.conf'
 alias dnsrestart='sudo /etc/init.d/dnsmasq restart'
-alias backup-galapagos='sudo rsync -av --delete /home/bwheeler/ /media/bwheeler/hyperion/galapagos/home/ && sudo rsync -av --delete /var/www/ /media/bwheeler/hyperion/galapagos/var/www/ && sudo rsync -av --delete /var/dockervols/ /media/bwheeler/hyperion/galapagos/var/dockervols/'
-alias server-start='docker start b5395ae392ed && docker start 6762c13de1e3'
+alias backup-galapagos='sudo rsync -av --delete /home/bwheeler/ /media/bwheeler/hyperion/galapagos/home/ && sudo rsync -av --delete /var/www/ /media/bwheeler/hyperion/galapagos/var/www/ && sudo rsync -av --delete /var/www-archive/ /media/bwheeler/hyperion/galapagos/var/www-archive/'
+alias server-start='lxc start lxcstack && lxc start apsu'
 alias sound-restart='pulseaudio -k && sudo alsa force-reload'
 alias drupalcs="phpcs --standard=~/.drush/coder/coder_sniffer/Drupal --extensions='php,module,inc,install,test,profile,theme,js,css,info,txt'"
 #shared paths
