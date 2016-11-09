@@ -1,5 +1,7 @@
-Bundle 'chase/vim-ansible-yaml'
+Bundle 'pearofducks/ansible-vim'
 Bundle 'nanotech/jellybeans.vim'
 Bundle 'stulzer/heroku-colorscheme'
 Bundle 'vim-scripts/ecostation'
 Bundle 'gcmt/taboo.vim'
+Bundle 'leafgarland/typescript-vim'
+Plugin 'cakebaker/scss-syntax.vim'

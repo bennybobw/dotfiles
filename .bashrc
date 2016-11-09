@@ -1,3 +1,5 @@
+
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -162,8 +164,7 @@ source ~/.sh_aliases
 #help! fix scm_breeze https://github.com/ndbroadbent/scm_breeze/issues/69
 #alias sudo='sudo '
 
-
-[ -s "/$HOME/.nvm/nvm.sh" ] && . "/$HOME//.nvm/nvm.sh" # This loads nvm
+[ -s "$HOME/.nvm/nvm.sh" ] && . "$HOME/.nvm/nvm.sh" # This loads nvm
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
@@ -174,6 +175,25 @@ source ~/.sh_aliases
 export PATH="$HOME/.composer/vendor/bin:$PATH"
 
 export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
+export PATH="$HOME/.local/bin:$PATH" # Add python pip to PATH
 
 # fix rvm complaining it's in the wrong spot
 source ~/.rvm/environments/default
+# Include Drush bash customizations.
+if [ -f "/home/bwheeler/.drush/drush.bashrc" ] ; then
+  source /home/bwheeler/.drush/drush.bashrc
+fi
+
+# Include Drush completion.
+if [ -f "/home/bwheeler/.drush/drush.complete.sh" ] ; then
+  source /home/bwheeler/.drush/drush.complete.sh
+fi
+
+# Include Drush prompt customizations.
+#if [ -f "/home/bwheeler/.drush/drush.prompt.sh" ] ; then
+#  source /home/bwheeler/.drush/drush.prompt.sh
+#fi
+
+# Drupal console
+source "$HOME/.console/console.rc" 2>/dev/null
+

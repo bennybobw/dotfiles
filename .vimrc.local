@@ -2,9 +2,6 @@
 " Load global vimrc
 source ~/.vimrc.default
 
-" Extra bundles
-Bundle 'cakebaker/scss-syntax.vim'
-
 let g:autoclose_loaded = 1
 
 map <leader>nt :NERDTreeToggle <CR>
