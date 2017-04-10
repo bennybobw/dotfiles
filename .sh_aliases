@@ -29,7 +29,8 @@ alias server-start='lxc start lxcstack && lxc start apsu'
 alias sound-restart='pulseaudio -k && sudo alsa force-reload'
 alias drupalcs="phpcs --standard=~/.drush/coder/coder_sniffer/Drupal --extensions='php,module,inc,install,test,profile,theme,js,css,info,txt'"
 alias mozjpeg="/opt/mozjpeg/bin/cjpeg"
-alias synctpl="rsync -azv --exclude '*.pdf' --exclude '*.doc' --exclude '*.docx' --exclude '*.ppt' --exclude '*.pptx' --exclude '*.mp4' --exclude '*.mov' --exclude '*.flv' --exclude '*.tar.gz' --exclude '*.mp3' --exclude '*.swf' --exclude '*.m4v' -e ssh adelewh.prod@srv-2540.devcloud.hosting.acquia.com:/mnt/files/adelewh/sites/default/files/ /var/www/tpl.lxd/htdocs/docroot/sites/default/files/"
+alias synctpl="rsync -azv --exclude '*.pdf' --exclude '*.doc' --exclude '*.docx' --exclude '*.ppt' --exclude '*.pptx' --exclude '*.mp4' --exclude '*.mov' --exclude '*.flv' --exclude '*.tar.gz' --exclude '*.mp3' --exclude '*.swf' --exclude '*.m4v' -e ssh adelewh.prod@srv-2540.devcloud.hosting.acquia.com:/mnt/files/adelewh/sites/default/files/ /var/www/tpl.lxc/htdocs/docroot/sites/default/files/"
 
 #shared paths
 export PATH="$PATH:$HOME/grscripts:$HOME/usr/bin"
+export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"

@@ -1,22 +1,8 @@
-
 " leader doesn't work on mac
 let mapleader=","
 
 " use jk for <ESC>
 inoremap jk <ESC>
-
-" quick syntax rehighlighting
-map <leader>sy :syn sync fromstart <CR>
-
-let g:autoclose_loaded = 1
-
-" Turn off stupid neocomplcache
-let g:neocomplcache_enable_at_startup = 0
-
-" stupid whitespace thing
-" set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
-set nolist
-let g:indent_guides_enable_on_vim_startup=0
 
 " Drupal tab stuff
 set expandtab
@@ -37,6 +23,12 @@ if has("autocmd")
     autocmd BufRead,BufNewFile *.theme set filetype=php
   augroup END
 endif
+
+" stupid whitespace thing
+" set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+set nolist
+let g:indent_guides_enable_on_vim_startup=0
+
 " Fix stupid terminal color thing
 set t_Co=256
 
@@ -55,21 +47,18 @@ set nolist  " list disables linebreak
 set textwidth=0
 set wrapmargin=0
 
-" VirtualEdit
-" set virtualedit=all
-
-" Color Scheme
-colorscheme jellybeans
-
 " Turn off spell highlighting
 set nospell
 
 set visualbell
 
-"create new line below current line without leaving normal mode or moving cursor
-noremap - m`o<Esc>``
-"create new line above current line without leaving normal mode or moving cursor
-noremap _ m`O<Esc>``
+" quick syntax rehighlighting
+map <leader>sy :syn sync fromstart <CR>
+
+let g:autoclose_loaded = 1
+
+" Turn off stupid neocomplcache
+let g:neocomplcache_enable_at_startup = 0
 
 " From Derek Wyatt http://www.derekwyatt.org/vim/the-vimrc-file/walking-around-your-windows/
 " Move the cursor to the window left of the current one
@@ -110,3 +99,13 @@ noremap <silent> ,mh <C-W>H
 
 " Move the current window to the bottom of the main Vim window
 noremap <silent> ,mj <C-W>J
+
+" Color Scheme
+colorscheme seattle
+
+
+"create new line below current line without leaving normal mode or moving cursor
+noremap - m`o<Esc>``
+"create new line above current line without leaving normal mode or moving cursor
+noremap _ m`O<Esc>``
+

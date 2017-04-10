@@ -1,3 +1,5 @@
 --type-add=php=.module,.php,.inc,.info
 --type-add
 css=.sass,.scss
+--type-add
+vim=.vim
