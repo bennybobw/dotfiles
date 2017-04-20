@@ -1,16 +1,22 @@
-" leader doesn't work on mac
 let mapleader=","
+
+if has('nvim')
+    let s:editor_root=expand("~/.nvim")
+else
+    let s:editor_root=expand("~/.vim")
+endif
 
 " use jk for <ESC>
 inoremap jk <ESC>
 
-" Drupal tab stuff
+" Tab stuff
 set expandtab
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set autoindent
 set smartindent
+
 " Drupal *.module and *.install files.
 if has("autocmd")
   augroup module
@@ -52,60 +58,67 @@ set nospell
 
 set visualbell
 
-" quick syntax rehighlighting
-map <leader>sy :syn sync fromstart <CR>
-
 let g:autoclose_loaded = 1
-
-" Turn off stupid neocomplcache
-let g:neocomplcache_enable_at_startup = 0
-
-" From Derek Wyatt http://www.derekwyatt.org/vim/the-vimrc-file/walking-around-your-windows/
-" Move the cursor to the window left of the current one
-noremap <silent> ,h :wincmd h<cr>
-
-" Move the cursor to the window below the current one
-noremap <silent> ,j :wincmd j<cr>
-
-" Move the cursor to the window above the current one
-noremap <silent> ,k :wincmd k<cr>
-
-" Move the cursor to the window right of the current one
-noremap <silent> ,l :wincmd l<cr>
-
-" Close the window below this one
-noremap <silent> ,cj :wincmd j<cr>:close<cr>
-
-" Close the window above this one
-noremap <silent> ,ck :wincmd k<cr>:close<cr>
-
-" Close the window to the left of this one
-noremap <silent> ,ch :wincmd h<cr>:close<cr>
-
-" Close the window to the right of this one
-noremap <silent> ,cl :wincmd l<cr>:close<cr>
-
-" Close the current window
-noremap <silent> ,cc :close<cr>
-
-" Move the current window to the right of the main Vim window
-noremap <silent> ,ml <C-W>L
-
-" Move the current window to the top of the main Vim window
-noremap <silent> ,mk <C-W>K
-
-" Move the current window to the left of the main Vim window
-noremap <silent> ,mh <C-W>H
-
-" Move the current window to the bottom of the main Vim window
-noremap <silent> ,mj <C-W>J
-
-" Color Scheme
-colorscheme seattle
-
 
 "create new line below current line without leaving normal mode or moving cursor
 noremap - m`o<Esc>``
 "create new line above current line without leaving normal mode or moving cursor
 noremap _ m`O<Esc>``
 
+" quick syntax rehighlighting
+map <leader>sy :syn sync fromstart <CR>
+
+" Setting up Vundle - the vim plugin bundler
+let vundle_installed=1
+let vundle_readme=s:editor_root . '/bundle/vundle/README.md'
+if !filereadable(vundle_readme)
+    echo "Installing Vundle.."
+    echo ""
+    " silent execute "! mkdir -p ~/." . s:editor_path_name . "/bundle"
+    silent call mkdir(s:editor_root . '/bundle', "p")
+    silent execute "!git clone https://github.com/gmarik/vundle " . s:editor_root . "/bundle/vundle"
+    let vundle_installed=0
+endif
+let &rtp = &rtp . ',' . s:editor_root . '/bundle/vundle/'
+call vundle#rc(s:editor_root . '/bundle')
+
+Bundle 'scrooloose/nerdtree'
+Bundle 'ctrlpvim/ctrlp.vim'
+Bundle 'tacahiroy/ctrlp-funky'
+Bundle 'nathanaelkane/vim-indent-guides'
+" Syntax stuff
+Bundle 'scrooloose/syntastic'
+Bundle 'hail2u/vim-css3-syntax'
+Bundle 'tpope/vim-markdown'
+Bundle 'pearofducks/ansible-vim'
+Bundle 'cakebaker/scss-syntax.vim'
+" Color Schemes
+Bundle 'mbbill/vim-seattle'
+
+" Use local bundles config if available {
+    if filereadable(expand("~/.vimrc.bundles.local"))
+        source ~/.vimrc.bundles.local
+    endif
+" }
+
+if vundle_installed == 0
+    echo "Installing Bundles, please ignore key map error messages"
+    echo ""
+    :BundleInstall
+endif
+
+" Toggle nerdtree
+map <leader>nt :NERDTreeToggle <CR>
+" quick syntax rehighlighting
+map <leader>sy :syn sync fromstart <CR>
+
+let g:syntastic_php_phpcs_args=" --standard=Drupal --extensions=php,module,inc,install,test,profile,theme"
+" Syntastic settings, adapted from
+" echodittolabs.org/drupal-coding-standards-vim-code-sniffer-syntastic-regex
+if exists('loaded_syntastic_plugin') && strlen(drupal#phpcs_exec)
+  let g:syntastic_php_phpcs_exec = drupal#phpcs_exec
+  let g:syntastic_php_phpcs_args = drupal#phpcs_args
+endif
+
+" Color Scheme
+colorscheme seattle
