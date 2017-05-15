@@ -6,18 +6,9 @@ alias passgen='pwgen -csy 22 1'
 alias apassgen='pwgen -cs 32 1'
 alias alpassgen='pwgen -cs 32 1'
 alias passjs='node /var/www/local.lxc/htdocs/pass/pass.js'
-alias apacherestart='sudo service apache2 restart'
-alias apachereload='sudo service apache2 reload'
 alias bashreload='source ~/.bashrc'
 alias bfg='java -jar /home/ben/bin/bfg.jar'
 alias movepanel='xfconf-query -c xfce4-panel -p /panels/panel-0/output-name -s'
-#docker commands
-alias rmssh='ssh-keygen -f "/home/bwheeler/.ssh/known_hosts" -R'
-alias dkssh='ssh -A -o "IdentitiesOnly=yes" -i ~/dockerfiles/phusion_baseimage_key'
-alias dkip='docker inspect -f "{{ .NetworkSettings.IPAddress }}"'
-alias dkps='docker ps'
-alias dkmysql='mysql -uadmin -padmin -h'
-alias fixmic="amixer -c1 cset numid=12,iface=MIXER,name='Input Source',index=0 1 && amixer -c1 cset numid=12,iface=MIXER,name='Input Source',index=0 0"
 alias qrsync="rsync -azvhe ssh --exclude '*.pdf' --exclude '*.doc' --exclude '*.docx' --exclude '*.ppt' --exclude '*.pptx' --exclude '*.mp4' --exclude '*.mov' --exclude '*.flv' --exclude '*.tar.gz' --exclude '*.mp3' --exclude '*.swf' --exclude '*.m4v'"
 alias qrsyncmirror="rsync --delete -azvhe ssh --exclude '*.pdf' --exclude '*.doc' --exclude '*.docx' --exclude '*.ppt' --exclude '*.pptx' --exclude ‘*.mp4’ --exclude ‘*.mov’ --exclude ‘*.flv’ --exclude '*.tar.gz' --exclude ‘*.mp3’ --exclude ‘*.swf’ --exclude ‘*.m4v’"
 alias sudoqrsync="sudo rsync -azvhe ssh --exclude '*.pdf' --exclude '*.doc' --exclude '*.docx' --exclude '*.ppt' --exclude '*.pptx' --exclude ‘*.mp4’ --exclude ‘*.mov’ --exclude ‘*.flv’ --exclude '*.tar.gz' --exclude ‘*.mp3’ --exclude ‘*.swf’"
@@ -30,6 +21,7 @@ alias sound-restart='pulseaudio -k && sudo alsa force-reload'
 alias drupalcs="phpcs --standard=~/.drush/coder/coder_sniffer/Drupal --extensions='php,module,inc,install,test,profile,theme,js,css,info,txt'"
 alias mozjpeg="/opt/mozjpeg/bin/cjpeg"
 alias synctpl="rsync -azv --exclude '*.pdf' --exclude '*.doc' --exclude '*.docx' --exclude '*.ppt' --exclude '*.pptx' --exclude '*.mp4' --exclude '*.mov' --exclude '*.flv' --exclude '*.tar.gz' --exclude '*.mp3' --exclude '*.swf' --exclude '*.m4v' -e ssh adelewh.prod@srv-2540.devcloud.hosting.acquia.com:/mnt/files/adelewh/sites/default/files/ /var/www/tpl.lxc/htdocs/docroot/sites/default/files/"
+alias drush5='/usr/local/share/drush5/drush'
 
 #shared paths
 export PATH="$PATH:$HOME/grscripts:$HOME/usr/bin"
