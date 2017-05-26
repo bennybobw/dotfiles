@@ -1,5 +1,3 @@
-
-
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -39,7 +37,7 @@ fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color) color_prompt=yes;;
+    xterm-color|*-256color) color_prompt=yes;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -86,6 +84,9 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+# colored GCC warnings and errors
+#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
@@ -115,85 +116,18 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# A shortcut function that simplifies usage of xclip.
-# - Accepts input from either stdin (pipe), or params.
-# ------------------------------------------------
-cb() {
-  local _scs_col="\e[0;32m"; local _wrn_col='\e[1;31m'; local _trn_col='\e[0;33m'
-  # Check that xclip is installed.
-  if ! type xclip > /dev/null 2>&1; then
-    echo -e "$_wrn_col""You must have the 'xclip' program installed.\e[0m"
-  # Check user is not root (root doesn't have access to user xorg server)
-  elif [[ "$USER" == "root" ]]; then
-    echo -e "$_wrn_col""Must be regular user (not root) to copy a file to the clipboard.\e[0m"
-  else
-    # If no tty, data should be available on stdin
-    if ! [[ "$( tty )" == /dev/* ]]; then
-      input="$(< /dev/stdin)"
-    # Else, fetch input from params
-    else
-      input="$*"
-    fi
-    if [ -z "$input" ]; then  # If no input, print usage message.
-      echo "Copies a string to the clipboard."
-      echo "Usage: cb <string>"
-      echo "       echo <string> | cb"
-    else
-      # Copy input to clipboard
-      echo -n "$input" | xclip -selection c
-      # Truncate text for status
-      if [ ${#input} -gt 80 ]; then input="$(echo $input | cut -c1-80)$_trn_col...\e[0m"; fi
-      # Print status.
-      echo -e "$_scs_col""Copied to clipboard:\e[0m $input"
-    fi
-  fi
-}
-# Aliases / functions leveraging the cb() function
-# ------------------------------------------------
-# Copy contents of a file
-function cbf() { cat "$1" | cb; }  
-# Copy current working directory
-alias cbwd="pwd | cb"  
-# Copy most recent command in bash history
-alias cbhs="cat $HISTFILE | tail -n 1 | cb" 
-
-#shared aliases
-source ~/.sh_aliases
-
-#http://www.shellperson.net/using-sudo-with-an-alias/
-#help! fix scm_breeze https://github.com/ndbroadbent/scm_breeze/issues/69
-#alias sudo='sudo '
-
-[ -s "$HOME/.nvm/nvm.sh" ] && . "$HOME/.nvm/nvm.sh" # This loads nvm
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
-# source /etc/bash_completion.d/password-store
+export NVM_DIR="/home/bwheeler/.nvm"
 
-[ -s "/home/bwheeler/.scm_breeze/scm_breeze.sh" ] && source "/home/bwheeler/.scm_breeze/scm_breeze.sh"
-
-export PATH="$HOME/.composer/vendor/bin:$PATH"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
 export PATH="$HOME/.local/bin:$PATH" # Add python pip to PATH
 
 # fix rvm complaining it's in the wrong spot
 source ~/.rvm/environments/default
-# Include Drush bash customizations.
-if [ -f "/home/bwheeler/.drush/drush.bashrc" ] ; then
-  source /home/bwheeler/.drush/drush.bashrc
-fi
 
-# Include Drush completion.
-if [ -f "/home/bwheeler/.drush/drush.complete.sh" ] ; then
-  source /home/bwheeler/.drush/drush.complete.sh
-fi
-
-# Include Drush prompt customizations.
-#if [ -f "/home/bwheeler/.drush/drush.prompt.sh" ] ; then
-#  source /home/bwheeler/.drush/drush.prompt.sh
-#fi
-
-# Drupal console
-source "$HOME/.console/console.rc" 2>/dev/null
-
+eval "$(scmpuff init -s)" #replacement for scm_breeze
