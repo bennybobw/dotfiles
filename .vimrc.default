@@ -3,8 +3,10 @@ set history=1000
 let mapleader=","
 set hlsearch
 
-" swap file placement
-set directory=$HOME/.vim/swapfiles//
+" swapfile placement
+if isdirectory($HOME . '/.vim/swapfiles')
+  set directory=$HOME/.vim/swapfiles//
+endif
 
 if has('nvim')
     let s:editor_root=expand("~/.nvim")
