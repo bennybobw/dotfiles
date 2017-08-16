@@ -97,24 +97,34 @@ endif
 let &rtp = &rtp . ',' . s:editor_root . '/bundle/vundle/'
 call vundle#rc(s:editor_root . '/bundle')
 
-Bundle 'scrooloose/nerdtree'
-Bundle 'ctrlpvim/ctrlp.vim'
-Bundle 'tacahiroy/ctrlp-funky'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'gcmt/taboo.vim'
+Plugin 'mileszs/ack.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'tacahiroy/ctrlp-funky'
 " Syntax stuff
-Bundle 'scrooloose/syntastic'
-Bundle 'hail2u/vim-css3-syntax'
-Bundle 'tpope/vim-markdown'
-Bundle 'pearofducks/ansible-vim'
-Bundle 'cakebaker/scss-syntax.vim'
-Bundle 'lumiliet/vim-twig'
+Plugin 'scrooloose/syntastic'
+Plugin 'hail2u/vim-css3-syntax'
+Plugin 'tpope/vim-markdown'
+Plugin 'pearofducks/ansible-vim'
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'lumiliet/vim-twig'
+
+" Airline
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+" Show airline before split
+set laststatus=2
+" See powerline fonts docs here: https://github.com/powerline/fonts
+let g:airline_powerline_fonts = 1
 
 " PHP
-Bundle 'spf13/PIV'
+Plugin 'spf13/PIV'
 " GIT
-Bundle 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive'
 
 " Color Schemes
-Bundle 'mbbill/vim-seattle'
+Plugin 'mbbill/vim-seattle'
 
 " Use local bundles config if available {
     if filereadable(expand("~/.vimrc.bundles.local"))
@@ -123,9 +133,9 @@ Bundle 'mbbill/vim-seattle'
 " }
 
 if vundle_installed == 0
-    echo "Installing Bundles, please ignore key map error messages"
+    echo "Installing Plugins, please ignore key map error messages"
     echo ""
-    :BundleInstall
+    :PluginInstall
 endif
 
 " Toggle nerdtree
@@ -145,3 +155,12 @@ let g:syntastic_scss_checkers = ['']
 
 " Color Scheme
 colorscheme seattle
+
+" Alias TabooRename to TR
+command TR TabooRename
+
+" Taboo save tab names in session
+set sessionoptions+=tabpages,globals
+
+" Strip trailing whitespace on saving php, javascript, css, scss files
+autocmd BufWritePre *.php,*.css,*.scss,*.js,*.jsx %s/\s\+$//e
