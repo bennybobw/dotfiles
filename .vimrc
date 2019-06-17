@@ -32,6 +32,9 @@ set number
 " file searching
 set wildmode=list:longest
 
+" turn on matchit macro
+runtime macros/matchit.vim
+
 " Drupal *.module and *.install files.
 if has("autocmd")
   augroup module
@@ -101,10 +104,13 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'gcmt/taboo.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'tacahiroy/ctrlp-funky'
+
 " Syntax stuff
 Plugin 'scrooloose/syntastic'
 Plugin 'hail2u/vim-css3-syntax'
+Plugin 'leafgarland/typescript-vim'
 Plugin 'tpope/vim-markdown'
 Plugin 'pearofducks/ansible-vim'
 Plugin 'cakebaker/scss-syntax.vim'
@@ -157,10 +163,13 @@ let g:syntastic_scss_checkers = ['']
 colorscheme seattle
 
 " Alias TabooRename to TR
-command TR TabooRename
+cabbrev TR TabooRename
 
 " Taboo save tab names in session
 set sessionoptions+=tabpages,globals
 
 " Strip trailing whitespace on saving php, javascript, css, scss files
-autocmd BufWritePre *.php,*.css,*.scss,*.js,*.jsx %s/\s\+$//e
+autocmd BufWritePre *.php,*.module,*.css,*.scss,*.js,*.jsx %s/\s\+$//e
+
+" Fix for yarn/parcel watchers
+set backupcopy=yes

@@ -3,3 +3,7 @@
 css=.sass,.scss
 --type-add
 vim=.vim
+--type-add
+yml=.yml
+
+
