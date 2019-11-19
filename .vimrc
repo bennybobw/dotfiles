@@ -103,9 +103,10 @@ call vundle#rc(s:editor_root . '/bundle')
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'gcmt/taboo.vim'
 Plugin 'mileszs/ack.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'tacahiroy/ctrlp-funky'
+Plugin 'skywind3000/quickmenu.vim'
+set rtp+=~/.fzf
+Plugin 'junegunn/fzf.vim'
 
 " Syntax stuff
 Plugin 'scrooloose/syntastic'
@@ -144,10 +145,11 @@ if vundle_installed == 0
     :PluginInstall
 endif
 
-" Toggle nerdtree
-map <leader>nt :NERDTreeToggle <CR>
 " quick syntax rehighlighting
 map <leader>sy :syn sync fromstart <CR>
+
+" map changing directory to current working directory 
+map <leader>cd :cd %:p:h<CR>
 
 let g:syntastic_php_phpcs_args=" --standard=Drupal --extensions=php,module,inc,install,test,profile,theme"
 " Syntastic settings, adapted from
@@ -173,3 +175,30 @@ autocmd BufWritePre *.php,*.module,*.css,*.scss,*.js,*.jsx %s/\s\+$//e
 
 " Fix for yarn/parcel watchers
 set backupcopy=yes
+
+" Syntax highlighting help
+" Press ctrl + shift + p to get help with a line
+" https://stackoverflow.com/questions/30247603/making-vim-show-a-git-diff-with-colors-like-a-git-diff-command-red-delete-gree
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif   
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+nmap <leader>syn :call <SID>SynStack()<CR>
+
+" Toggle netrw
+map <leader>nt :edit .<CR>
+" Toggle quickmenu
+map <leader>m :call quickmenu#toggle(0)<CR>
+
+" quickmenu enable cursorline (L) and cmdline help (H)
+let g:quickmenu_options = "HL"
+call g:quickmenu#append('# Directories', '')
+
+if isdirectory("/var/www/usenix.local")
+  call g:quickmenu#append('Usenix modules', 'edit /var/www/usenix.local/htdocs/sites/all/modules/usenix | normal c', 'Usenix modules directory')
+  call g:quickmenu#append('Usenix checkout', 'edit /var/www/usenix.local/htdocs/sites/all/modules/usenix/usenix_commerce_checkout | normal c', 'Usenix commerce checkout')
+  call g:quickmenu#append('Taco sass', 'edit /var/www/usenix.local/htdocs/sites/all/themes/custom/taco | normal c', 'Taco')
+  call g:quickmenu#append('Taco sass', 'edit /var/www/usenix.local/htdocs/sites/all/themes/custom/taco/sass/components | normal c', 'Taco sass')
+endif
