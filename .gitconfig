@@ -1,0 +1,12 @@
+[user]
+	email = bwheeler@giantrabbit.com
+	name = bwheeler
+[core]
+	editor = vim
+[merge]
+	renamelimit = 4000
+[diff]
+	tool = vimdiff
+[pager]
+	show = vim -R -c 'set ft=gitcommit'  -
+	color = false
