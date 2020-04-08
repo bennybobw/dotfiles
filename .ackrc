@@ -5,5 +5,3 @@ css=.sass,.scss
 vim=.vim
 --type-add
 yml=.yml
-
-

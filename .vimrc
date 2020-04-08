@@ -148,9 +148,6 @@ endif
 " quick syntax rehighlighting
 map <leader>sy :syn sync fromstart <CR>
 
-" map changing directory to current working directory 
-map <leader>cd :cd %:p:h<CR>
-
 let g:syntastic_php_phpcs_args=" --standard=Drupal --extensions=php,module,inc,install,test,profile,theme"
 " Syntastic settings, adapted from
 " echodittolabs.org/drupal-coding-standards-vim-code-sniffer-syntastic-regex
@@ -186,6 +183,9 @@ function! <SID>SynStack()
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
 nmap <leader>syn :call <SID>SynStack()<CR>
+
+" map changing directory to current working directory 
+map <leader>cd :cd %:p:h<CR>
 
 " Toggle netrw
 map <leader>nt :edit .<CR>
