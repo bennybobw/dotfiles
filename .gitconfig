@@ -8,12 +8,16 @@
 [diff]
 	tool = vimdiff
 [pager]
-	show = vim -R -c 'set ft=gitcommit'  -
-  color = false 
+  #show = vim -R -c 'set ft=gitcommit'  -
+  color = true 
 [color]
-  diff = false 
+  diff = true 
   status = auto
   branch = auto
   interactive = auto
   ui = true 
   pager = true 
+[alias]
+  showtool = "!showci () { rev=${1:-HEAD}; git difftool $rev~1 $rev; }; showci $1"
+[split-diffs]
+	theme-name = arctic

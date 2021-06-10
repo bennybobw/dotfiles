@@ -45,6 +45,7 @@ if has("autocmd")
     autocmd BufRead,BufNewFile *.profile set filetype=php
     autocmd BufRead,BufNewFile *.view set filetype=php
     autocmd BufRead,BufNewFile *.theme set filetype=php
+    autocmd BufRead,BufNewFile *.twig set filetype=htmljinja
   augroup END
 endif
 
@@ -132,6 +133,7 @@ Plugin 'tpope/vim-fugitive'
 
 " Color Schemes
 Plugin 'mbbill/vim-seattle'
+Plugin 'arzg/vim-colors-xcode'
 
 " Use local bundles config if available {
     if filereadable(expand("~/.vimrc.bundles.local"))
@@ -159,7 +161,7 @@ endif
 let g:syntastic_scss_checkers = ['']
 
 " Color Scheme
-colorscheme seattle
+colorscheme xcodedarkhc 
 
 " Alias TabooRename to TR
 cabbrev TR TabooRename
@@ -168,7 +170,7 @@ cabbrev TR TabooRename
 set sessionoptions+=tabpages,globals
 
 " Strip trailing whitespace on saving php, javascript, css, scss files
-autocmd BufWritePre *.php,*.module,*.css,*.scss,*.js,*.jsx %s/\s\+$//e
+" autocmd BufWritePre *.php,*.module,*.css,*.scss,*.js,*.jsx %s/\s\+$//e
 
 " Fix for yarn/parcel watchers
 set backupcopy=yes
