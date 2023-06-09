@@ -5,7 +5,7 @@ set hlsearch
 
 " swapfile placement
 if isdirectory($HOME . '/.vim/swapfiles')
-  set directory=$HOME/.vim/swapfiles//
+  set directory=$HOME/.vim/swapfiles/
 endif
 
 if has('nvim')
@@ -24,7 +24,6 @@ set shiftwidth=2
 set softtabstop=2
 set autoindent
 set smartindent
-filetype plugin indent on
 
 " turn on line numbers
 set number
@@ -88,6 +87,7 @@ noremap _ m`O<Esc>``
 map <leader>sy :syn sync fromstart <CR>
 
 " Setting up Vundle - the vim plugin bundler
+filetype off
 let vundle_installed=1
 let vundle_readme=s:editor_root . '/bundle/vundle/README.md'
 if !filereadable(vundle_readme)
@@ -128,6 +128,8 @@ let g:airline_powerline_fonts = 1
 
 " PHP
 Plugin 'spf13/PIV'
+" Elixir
+Plugin 'elixir-editors/vim-elixir'
 " GIT
 Plugin 'tpope/vim-fugitive'
 
@@ -198,9 +200,7 @@ map <leader>m :call quickmenu#toggle(0)<CR>
 let g:quickmenu_options = "HL"
 call g:quickmenu#append('# Directories', '')
 
-if isdirectory("/var/www/usenix.local")
-  call g:quickmenu#append('Usenix modules', 'edit /var/www/usenix.local/htdocs/sites/all/modules/usenix | normal c', 'Usenix modules directory')
-  call g:quickmenu#append('Usenix checkout', 'edit /var/www/usenix.local/htdocs/sites/all/modules/usenix/usenix_commerce_checkout | normal c', 'Usenix commerce checkout')
-  call g:quickmenu#append('Taco sass', 'edit /var/www/usenix.local/htdocs/sites/all/themes/custom/taco | normal c', 'Taco')
-  call g:quickmenu#append('Taco sass', 'edit /var/www/usenix.local/htdocs/sites/all/themes/custom/taco/sass/components | normal c', 'Taco sass')
-endif
+" Don't use filetype's python defaults
+let g:python_recommended_style = 0
+filetype plugin indent on
+syntax on

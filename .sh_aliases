@@ -2,9 +2,7 @@
 #bens aliases
 #alias cd='pushd'
 alias edithosts='sudo vim /etc/hosts'
-alias passgen='pwgen -csy 22 1'
-alias apassgen='pwgen -cs 32 1'
-alias alpassgen='pwgen -cs 32 1'
+alias passgen='apg -m 24 -a 1 -M NCL'
 alias passjs='node /var/www/local.local/htdocs/pass/pass.js'
 alias bashreload='source ~/.bashrc'
 alias bfg='java -jar /home/ben/bin/bfg.jar'
@@ -12,12 +10,11 @@ alias movepanel='xfconf-query -c xfce4-panel -p /panels/panel-0/output-name -s'
 alias qrsync="rsync -azvhe ssh --exclude '*.pdf' --exclude '*.doc' --exclude '*.docx' --exclude '*.ppt' --exclude '*.pptx' --exclude '*.mp4' --exclude '*.mov' --exclude '*.flv' --exclude '*.tar.gz' --exclude '*.mp3' --exclude '*.swf' --exclude '*.m4v'"
 alias qrsyncmirror="rsync --delete -azvhe ssh --exclude '*.pdf' --exclude '*.doc' --exclude '*.docx' --exclude '*.ppt' --exclude '*.pptx' --exclude ‘*.mp4’ --exclude ‘*.mov’ --exclude ‘*.flv’ --exclude '*.tar.gz' --exclude ‘*.mp3’ --exclude ‘*.swf’ --exclude ‘*.m4v’"
 alias sudoqrsync="sudo rsync -azvhe ssh --exclude '*.pdf' --exclude '*.doc' --exclude '*.docx' --exclude '*.ppt' --exclude '*.pptx' --exclude ‘*.mp4’ --exclude ‘*.mov’ --exclude ‘*.flv’ --exclude '*.tar.gz' --exclude ‘*.mp3’ --exclude ‘*.swf’"
-alias backup-galapagos='sudo rsync -av --delete /home/bwheeler/ /media/bwheeler/hyperion/galapagos/home/ && sudo rsync -av --delete /var/www/ /media/bwheeler/hyperion/galapagos/var/www/'
 alias drupalcs="phpcs --standard=~/.drush/coder/coder_sniffer/Drupal --extensions='php,module,inc,install,test,profile,theme,js,css,info,txt'"
 alias mozjpeg="/opt/mozjpeg/bin/cjpeg"
-alias synctpl="rsync -azv --exclude '*.pdf' --exclude '*.doc' --exclude '*.docx' --exclude '*.ppt' --exclude '*.pptx' --exclude '*.mp4' --exclude '*.mov' --exclude '*.flv' --exclude '*.tar.gz' --exclude '*.mp3' --exclude '*.swf' --exclude '*.m4v' -e ssh tplwebsite.prod@ded-36890.prod.hosting.acquia.com:/mnt/files/tplwebsite.prod/sites/default/files/ /var/www/tpl.local/htdocs/docroot/sites/default/files/"
 alias drush5='/usr/local/share/drush5/drush'
 alias www='sudo -u www-data'
+alias composer8='/usr/bin/php8.0 /usr/local/bin/composer'
 
 #shared paths
 export PATH="$PATH:$HOME/scripts:$HOME/usr/bin"
