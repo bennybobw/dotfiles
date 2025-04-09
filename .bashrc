@@ -133,14 +133,18 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init - bash)"
 
 #nvm
-export NVM_DIR="/home/bwheeler/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 #mailhog
-export GOPATH="/home/bwheeler/gocode" 
+#export GOPATH="/home/bwheeler/gocode" 
 
 # save all history
 export PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+if test -e "/usr/local/bin/jumper"; then
+  eval "$(jumper shell bash)"
+fi

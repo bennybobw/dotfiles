@@ -2,6 +2,7 @@
 #bens aliases
 #alias cd='pushd'
 alias edithosts='sudo vim /etc/hosts'
+addhost() { echo "127.0.0.1 $1" | sudo tee -a /etc/hosts; }
 alias passgen='apg -m 24 -a 1 -M NCL'
 alias passjs='node /var/www/local.local/htdocs/pass/pass.js'
 alias bashreload='source ~/.bashrc'
@@ -15,13 +16,15 @@ alias mozjpeg="/opt/mozjpeg/bin/cjpeg"
 alias drush5='/usr/local/share/drush5/drush'
 alias www='sudo -u www-data'
 alias composer8='/usr/bin/php8.0 /usr/local/bin/composer'
+alias browserstack='/opt/browserstack/BrowserStackLocal --key NsCCKyzztnTUSFx9pBk5'
+alias backdropcheck="grep -rE 'variable_|update_[0-9][0-9][0-9][0-9]|node_save\(|node_delete\(|user_save\(|user_load\(|user_delete\(|file_save\(|file_load\(|file_delete\(|comment_save\(|comment_load\(|comment_delete\(|taxonomy_vocabulary_save\(|taxonomy_vocabulary_load\(|taxonomy_vocabulary_delete\(entity_save\(|entityType|identifier\(|EntityAPIController|entity_property_verbatim_set|defaultLabel\(|files\['"
 
 #shared paths
 export PATH="$PATH:$HOME/scripts:$HOME/usr/bin"
 export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
 
-#if [ -f /usr/bin/nvim ]; then
-#  alias vim='/usr/bin/nvim'
-#  alias vimold='/usr/bin/vim'
-#  alias oldvim='/usr/bin/vim'
-#fi
+if [ -f /usr/bin/nvim ]; then
+  alias vim='/usr/bin/nvim'
+  alias vimold='/usr/bin/vim'
+  alias ovim='/usr/bin/vim'
+fi
