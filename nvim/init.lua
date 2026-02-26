@@ -1,6 +1,7 @@
 vim.g.mapleader = ","
 vim.g.maplocalleader = "\\"
 vim.opt.termguicolors = true
+vim.o.showtabline = 2
 
 require("config.lazy")
 
@@ -32,17 +33,20 @@ au FileType php set tw=0 ts=8 sts=2 sw=2
 au FileType lua set tw=0 ts=8 sts=2 sw=2
 au FileType ruby set tw=0 ts=8 sts=2 sw=2
 au FileType python set tw=0 ts=8 sts=2 sw=2
-au BufNewFile,BufRead *.py set ts=4 sts=4 sw=4 tw=79 autoindent
+au BufNewFile,BufRead *.py set ts=2 sts=2 sw=2 tw=79 autoindent
 au BufRead,BufNewFile *.dart set tw=0 ts=4 sts=2 sw=2
 au BufRead,BufNewFile *.theme set filetype=php
 au BufRead,BufNewFile *.twig set filetype=php
 au BufRead,BufNewFile *.install set filetype=php
 au BufRead,BufNewFile *.inc set filetype=php
 au BufRead,BufNewFile *.module set filetype=php
+au BufRead,BufNewFile *.test set filetype=php
 ]])
 
 require('colorizer').setup()
-vim.cmd([[colorscheme nightfly]])
+
+--vim.g.dracula_italic = 0
+-- vim.cmd[[colorscheme dracula-soft]]
 
 --- harpoon setup
 local harpoon = require("harpoon")
@@ -62,3 +66,24 @@ vim.keymap.set("n", "<C-s>", function() harpoon:list():select(4) end)
 -- Toggle previous & next buffers stored within Harpoon list
 vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
 vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
+
+-- Set rename for tabby
+vim.api.nvim_create_user_command("TR", function(opts)
+  vim.t.tab_name = opts.args
+end, {
+  nargs = 1,
+})
+-- Colorscheme for tabby
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = function()
+    -- Make tabline blend with your dark background.
+    -- Links are safest across themes.
+    vim.api.nvim_set_hl(0, "TabLineFill", { link = "Normal" })
+    vim.api.nvim_set_hl(0, "TabLine",     { link = "StatusLineNC" })
+    vim.api.nvim_set_hl(0, "TabLineSel",  { link = "StatusLine" })
+  end,
+})
+-- Apply immediately for the current colorscheme too:
+vim.api.nvim_set_hl(0, "TabLineFill", { link = "Normal" })
+vim.api.nvim_set_hl(0, "TabLine",     { link = "StatusLineNC" })
+vim.api.nvim_set_hl(0, "TabLineSel",  { link = "StatusLine" })
