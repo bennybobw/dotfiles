@@ -2,6 +2,7 @@ vim.g.mapleader = ","
 vim.g.maplocalleader = "\\"
 vim.opt.termguicolors = true
 vim.o.showtabline = 2
+vim.opt.splitbelow = true
 
 require("config.lazy")
 
@@ -13,6 +14,7 @@ inoremap jk <ESC>
 set title
 set expandtab
 set nomodeline
+set ignorecase
 
 set ts=8 sts=2 sw=2 tw=77
 set number
@@ -87,3 +89,36 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 vim.api.nvim_set_hl(0, "TabLineFill", { link = "Normal" })
 vim.api.nvim_set_hl(0, "TabLine",     { link = "StatusLineNC" })
 vim.api.nvim_set_hl(0, "TabLineSel",  { link = "StatusLine" })
+
+-- netrw
+vim.g.netrw_banner = 0       -- hide top banner
+vim.g.netrw_liststyle = 3    -- tree view
+--vim.g.netrw_browse_split = 4 -- open files in previous window
+vim.g.netrw_winsize = 25     -- sidebar size
+
+-- Custom aliases
+vim.keymap.set("n", "<leader>jt", function()
+  vim.cmd("tabedit /var/www/prm.local/site/web/themes/custom/watershed/css")
+end)
+
+vim.keymap.set("n", "<leader>jm", function()
+  vim.cmd("tabedit /var/www/prm.local/site/web/modules/custom/")
+end)
+
+vim.keymap.set("n", "<leader>cc", function()
+  vim.cmd("tabedit /home/bwheeler/dotfiles/nvim/init.lua")
+end, { desc = "Open init.lua" })
+
+vim.keymap.set("n", "<leader>cp", function()
+  vim.cmd("tabedit " .. vim.fn.stdpath("config") .. "/lua/plugins/plugins.lua")
+end, { desc = "Open plugins.lua" })
+
+vim.keymap.set("n", "<leader>cr", function()
+  dofile(vim.fn.stdpath("config") .. "/init.lua")
+  vim.notify("Config reloaded!")
+end, { desc = "Open plugins.lua" })
+
+vim.api.nvim_create_user_command("CR", function()
+  dofile(vim.fn.stdpath("config") .. "/init.lua")
+  vim.notify("Config reloaded!")
+end, {})

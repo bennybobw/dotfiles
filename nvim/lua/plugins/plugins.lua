@@ -3,6 +3,10 @@ return {
   "pangloss/vim-javascript",
   { "bluz71/vim-nightfly-colors", name = "nightfly", lazy = false, priority = 1000 },
   {
+    "editorconfig/editorconfig-vim",
+    lazy = false
+  },
+  {
     'ray-x/aurora',
     init = function()
       vim.g.aurora_italic = 0
@@ -25,22 +29,54 @@ return {
     "ibhagwan/fzf-lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-      require("fzf-lua").setup({})
-      
-      vim.keymap.set("n", "<leader>ff", function()
-        require("fzf-lua").files()
-      end)
+      local fzf = require("fzf-lua")
+      fzf.setup({
+        fzf_opts = {
+          ["--nth"] = "1..", -- improves scoring for filenames
+        },
+      })
 
-      vim.keymap.set("n", "<leader>fg", function()
-        require("fzf-lua").live_grep()
-      end)
+      -- helper to get git root
+      local function git_root()
+        local root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+        if vim.v.shell_error == 0 and root ~= "" then
+          return root
+        end
+        return vim.fn.getcwd()
+      end
+
+      -- tracked files only
+      --[[
+      vim.keymap.set("n", "<leader>ff", function()
+        fzf.git_files({ cwd = git_root() })
+      end, { desc = "Git tracked files" })
+      --]]
+
+      -- all files in repo, including untracked
+      vim.keymap.set("n", "<leader>ff", function()
+        fzf.files({
+          cwd = git_root(),
+          fzf_opts = {
+            ["--exact"] = "",
+          },
+        })
+      end, { desc = "All files in repo" })
+
+      -- grep entire git repo
+      vim.keymap.set("n", "<leader>ft", function()
+        fzf.live_grep({ cwd = git_root() })
+      end, { desc = "Grep git root" })
+
+      -- grep current working directory
+      vim.keymap.set("n", "<leader>fc", function()
+        fzf.live_grep({ cwd = vim.fn.getcwd() })
+      end, { desc = "Grep cwd" })
 
       vim.keymap.set("n", "<leader>fb", function()
-        require("fzf-lua").buffers()
+        fzf.buffers()
       end)
     end
   },
-  {"nanozuki/tabby.nvim"},
   {
     "EdenEast/nightfox.nvim",
     lazy = false,        -- load during startup
@@ -52,7 +88,12 @@ return {
         },
       })
       vim.cmd.colorscheme("duskfox")
-      require("plugins.nightfox_tabby").setup()
+    end,
+  },
+  {"nanozuki/tabby.nvim",
+    lazy = false,
+    config = function()
+      require("ui.nightfox_tabby")
     end,
   },
 }

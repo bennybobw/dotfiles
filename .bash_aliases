@@ -18,6 +18,7 @@ alias www='sudo -u www-data'
 alias composer8='/usr/bin/php8.0 /usr/local/bin/composer'
 alias browserstack='/opt/browserstack/BrowserStackLocal --key NsCCKyzztnTUSFx9pBk5'
 alias backdropcheck="grep -rE 'variable_|update_[0-9][0-9][0-9][0-9]|node_save\(|node_delete\(|user_save\(|user_load\(|user_delete\(|file_save\(|file_load\(|file_delete\(|comment_save\(|comment_load\(|comment_delete\(|taxonomy_vocabulary_save\(|taxonomy_vocabulary_load\(|taxonomy_vocabulary_delete\(entity_save\(|entityType|identifier\(|EntityAPIController|entity_property_verbatim_set|defaultLabel\(|files\['"
+alias mtset="sudo /usr/bin/php8.3 /opt/gr/command_line_tools/gr set-perms -u bwheeler -g giantrabbit"
 
 #shared paths
 export PATH="$PATH:$HOME/scripts:$HOME/usr/bin"
@@ -28,3 +29,9 @@ if [ -f /usr/bin/nvim ]; then
   alias vimold='/usr/bin/vim'
   alias ovim='/usr/bin/vim'
 fi
+
+# quickly switch PHP CLI version
+alias php74='sudo update-alternatives --set php /usr/bin/php7.4'
+alias php81='sudo update-alternatives --set php /usr/bin/php8.1'
+alias php82='sudo update-alternatives --set php /usr/bin/php8.2'
+alias php83='sudo update-alternatives --set php /usr/bin/php8.3'

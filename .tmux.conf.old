@@ -1,0 +1,46 @@
+#set switch to ctrl-a
+set -g prefix C-a
+unbind C-b
+bind C-a send-prefix
+
+#use vi mode
+set -g status-keys vi
+setw -g mode-keys vi
+
+# more intuitive keybindings for splitting
+unbind %
+bind h split-window -v
+unbind '"'
+bind v split-window -h
+
+#colores
+set -g default-terminal "screen-256color"
+
+#shell
+set -g default-command "$SHELL --login"
+set -g default-shell $SHELL
+
+#Sane scrolling
+set -g mouse on
+
+#better copy paste
+#http://jasonwryan.com/blog/2011/06/07/copy-and-paste-in-tmux/
+unbind [
+bind c copy-mode
+unbind p
+bind p paste-buffer
+#https://github.com/tmux/tmux/issues/754#issuecomment-297452143
+bind-key -T copy-mode-vi 'v' send-keys -X begin-selection
+bind-key -T copy-mode-vi 'y' send-keys -X copy-selection
+
+# copy & paste between tmux and x clipboard
+# http://stackoverflow.com/questions/19101735/keyboard-shortcuts-in-tmux-deactivated-after-using-xclip
+# https://wiki.archlinux.org/index.php/Tmux#ICCCM_Selection_Integration
+bind C-p run-shell "tmux set-buffer \"$(xclip -o)\"; tmux paste-buffer"
+bind C-y run-shell "tmux show-buffer | xsel -i -b"
+
+# set ctrl-a a to go to beginning of line
+bind a send-prefix
+
+#history
+set-option -g history-limit 10000

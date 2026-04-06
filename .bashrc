@@ -145,6 +145,20 @@ export PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
-if test -e "/usr/local/bin/jumper"; then
-  eval "$(jumper shell bash)"
+#if test -e "/usr/local/bin/jumper"; then
+#  eval "$(jumper shell bash)"
+#fi
+
+if [[ -n "$TMUX" ]] && ! declare -F __vte_prompt_command >/dev/null; then
+  PROMPT_COMMAND="${PROMPT_COMMAND//__vte_prompt_command; /}"
+  PROMPT_COMMAND="${PROMPT_COMMAND//; __vte_prompt_command/}"
+  PROMPT_COMMAND="${PROMPT_COMMAND//__vte_prompt_command/}"
 fi
+
+# Alias for unserialize helper
+if [ -f "$HOME/dotfiles/unserialize.php" ]; then
+  alias unserialize="$HOME/dotfiles/unserialize.php"
+fi
+
+# opencode
+export PATH=/home/bwheeler/.opencode/bin:$PATH

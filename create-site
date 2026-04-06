@@ -19,7 +19,7 @@ else
     domain_name="$site.local"
 fi
 
-app_env="dev"
+app_env="local"
 app_name=$site
 db_root_user="admin"
 db_root_pw="admin"
@@ -41,4 +41,4 @@ sudo sed -i "s/{{ app_name }}/${app_name}/g" "$site".local.conf
 sudo a2ensite "$site".local
 sudo systemctl reload apache2
 echo "127.0.0.1 ${domain_name}" | sudo tee -a /etc/hosts
-mysql -u${db_root_user} -p${db_root_pw} -e "create database ${site}_dev"
+mysql -u${db_root_user} -p${db_root_pw} -e "create database ${site}_local"
